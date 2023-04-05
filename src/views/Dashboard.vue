@@ -46,10 +46,10 @@ export default {
     doneTodosLength() {
       return this.$store.getters.doneTodos.length;
     },
-    methods: {
-      Logout() {
-        this.$store.dispatch("logout");
-      },
+  },
+  methods: {
+    Logout() {
+      this.$store.dispatch("logout");
     },
   },
   created() {
