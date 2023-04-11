@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/Home.vue";
 import LoginView from "../views/Login.vue";
 import RegisterView from "../views/Register.vue";
 import DashboardView from "../views/Dashboard.vue";
@@ -7,11 +6,6 @@ import DashboardView from "../views/Dashboard.vue";
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
-  },
-  {
-    path: "/profile",
     name: "Dashboard",
     component: DashboardView,
     meta: { requiresAuth: true },
@@ -33,7 +27,7 @@ const router = createRouter({
   routes,
 });
 router.beforeEach((to, from, next) => {
-  const publicPages = ["/login", "/register", "/"];
+  const publicPages = ["/login", "/register"];
   const authPages = !publicPages.includes(to.path);
   const loggedIn = localStorage.getItem("user");
   if (authPages && !loggedIn) {

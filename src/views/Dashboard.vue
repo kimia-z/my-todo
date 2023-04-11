@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar fixed-top navbar-light bg-light">
     <div class="container-fluid navbar-brand nav d-flex justify-content-end">
-      <router-link :to="{ name: 'home' }" class="link"
+      <router-link :to="{ name: 'LoginView' }" class="link"
         ><button class="btn btn-success" @click="Logout">
           Logout
         </button></router-link
