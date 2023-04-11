@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+    todopgdb:
+        image: postgres
+        container_name: todopgdb
+        environment:
+            - POSTGRES_DB=rssfeed
+            - POSTGRES_USER=ahmadreza
+            - POSTGRES_PASSWORD=password
+        volumes:
+            - pgdata:/var/lib/postgresql/data/
+    tododjango:
+        image: ahmadrezab76/archive-tododjango:second
+        container_name: tododjango
+        command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+        ports:
+            - "8200:8000"
+        depends_on:
+            - todopgdb
+        restart: unless-stopped
+
+    vue-ui:
+      build: .
+      ports:
+        - "8080:8080"
+      container_name: vue-ui
+      volumes:
+        - .:/usr/src/app
+        - /usr/src/app/node_modules
+
+volumes:
+    pgdata:
